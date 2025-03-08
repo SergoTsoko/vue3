@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.idea
+projectFilesBackup
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+package-lock.json
+
+public
+.gitlab-ci.yml
