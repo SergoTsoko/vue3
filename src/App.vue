@@ -16,12 +16,14 @@ export default{
       this.number -= 1
     },
     hideText(){
-    this.text = "                               "
+    this.text = "                               ";
+    addEventListener
     },
     showText(){
       this.text = "Тут написан очень важный текст"
     }
   }
+  
 
 }
 
@@ -78,6 +80,10 @@ export default{
 .samtext{
   justify-content: center;
   display: flex;
+}
+
+.el-button+.el-button{
+  margin: 5px;
 }
 
 </style>
