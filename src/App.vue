@@ -6,8 +6,11 @@ export default {
     return {
       number: 0,
       text: "Тут написан очень важный текст",
-      isTextVisible: true // добавляем переменную для управления видимостью
-    };
+      isTextVisible: true, 
+      userName: "",
+      UserPassword:"",
+      users: [],
+   };
   },
   methods: {
     addNumber() {
@@ -17,24 +20,33 @@ export default {
       this.number -= 1;
     },
     toggleText() {
-      this.isTextVisible = !this.isTextVisible; // переключаем состояние
+      this.isTextVisible = !this.isTextVisible; 
+},
+    sendData(){
+      this.users.push({
+        name: this.userName,
+        pass:this.UserPassword,
+      })
+    },
+    resetData(){
+      this.users.length = 0; 
     }
-  }
+  },
 };
 </script>
 
 <template>
-  <div class="number">
+  <!-- <div class="number">
     <el-button type="primary" @click="addNumber">+</el-button>
     <el-button type="primary" @click="removeNumber">-</el-button>
-  </div>
+  </div> -->
   
-  <div class="cifra">
+  <!-- <div class="cifra">
     Ваша цифра: <em>{{ number }}</em> 
-  </div>
+  </div> -->
 
   <div>
-    <div class="text1">
+    <!-- <div class="text1">
       <el-button type="primary" @click="toggleText">
         {{ isTextVisible ? "Скрыть текст" : "Показать текст" }}
       </el-button>
@@ -42,8 +54,28 @@ export default {
 
     <div class="samtext" v-if="isTextVisible">
       {{ text }}
+    </div> -->
+    <div class="cards">
+      <input type="text" v-model="userName" placeholder="Write your name">
+      <input type="password" v-model="UserPassword" placeholder="Write your Password">
+      <el-button class="sender" @click="sendData()" >Submit</el-button>
+      <el-button class="sender" @click="resetData()" >Reset</el-button>
+
+      <el-card class="card">
+    <p v-for="o in 10" :key="o" class="text item">{{ user }}</p>
+    <div v-for="(el, index) in users " :key="index">
+      <p>Тут повторяется то что было введино  
+      или не введино/ например ты ввел имя - {{ el.name }}</p>
+      <p>
+        а если ты тут ты ввел пароль - {{ el.pass }}
+      </p>
+    </div> 
+  </el-card>
     </div>
   </div>
+
+
+
 </template>
 
 <style scoped>
@@ -66,5 +98,13 @@ export default {
 }
 .el-button + .el-button {
   margin: 5px;
+}
+.sender{
+  background-color:rgb(121, 35, 121);
+  color:black
+}
+.card{
+  background-color: rgb(99, 99, 219);
+  max-width: 480px;
 }
 </style>
