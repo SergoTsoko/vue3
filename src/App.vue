@@ -1,7 +1,49 @@
+
+
+<template>
+  <!-- <div class="number">
+    <el-button type="primary" @click="addNumber">+</el-button>
+    <el-button type="primary" @click="removeNumber">-</el-button>
+  </div> -->
+  
+  <!-- <div class="cifra">
+    Ваша цифра: <em>{{ number }}</em> 
+  </div> -->
+
+  <div>
+    <!-- <div class="text1">
+      <el-button type="primary" @click="toggleText">
+        {{ isTextVisible ? "Скрыть текст" : "Показать текст" }}
+      </el-button>
+    </div>
+
+    <div class="samtext" v-if="isTextVisible">
+      {{ text }}
+    </div> -->
+    
+    <card></card>
+    <card></card>
+    <card></card>
+    <card></card>
+    <card></card>
+    <card></card>
+    <card></card>
+    <card></card>
+    <card></card>
+    <card></card>
+    
+  </div>
+
+
+
+</template>
+
 <script>
 import ElementPlus from 'element-plus';
-
+import form from './components/form.vue'
+import card from  './components/card.vue'
 export default {
+  components: { card },
   data() {
     return {
       number: 0,
@@ -10,6 +52,7 @@ export default {
       userName: "",
       UserPassword:"",
       users: [],
+     
    };
   },
   methods: {
@@ -35,50 +78,8 @@ export default {
 };
 </script>
 
-<template>
-  <!-- <div class="number">
-    <el-button type="primary" @click="addNumber">+</el-button>
-    <el-button type="primary" @click="removeNumber">-</el-button>
-  </div> -->
-  
-  <!-- <div class="cifra">
-    Ваша цифра: <em>{{ number }}</em> 
-  </div> -->
 
-  <div>
-    <!-- <div class="text1">
-      <el-button type="primary" @click="toggleText">
-        {{ isTextVisible ? "Скрыть текст" : "Показать текст" }}
-      </el-button>
-    </div>
-
-    <div class="samtext" v-if="isTextVisible">
-      {{ text }}
-    </div> -->
-    <div class="cards">
-      <input type="text" v-model="userName" placeholder="Write your name">
-      <input type="password" v-model="UserPassword" placeholder="Write your Password">
-      <el-button class="sender" @click="sendData()" >Submit</el-button>
-      <el-button class="sender" @click="resetData()" >Reset</el-button>
-
-      <el-card class="card">
-    <p v-for="o in 10" :key="o" class="text item">{{ user }}</p>
-    <div v-for="(el, index) in users " :key="index">
-      <p>Тут повторяется то что было введино  
-      или не введино/ например ты ввел имя - {{ el.name }}</p>
-      <p>
-        а если ты тут ты ввел пароль - {{ el.pass }}
-      </p>
-    </div> 
-  </el-card>
-    </div>
-  </div>
-
-
-
-</template>
-
-<style scoped>
+<style >
 .number {
   margin-left: 40%;
   padding-top: 50px;
@@ -106,5 +107,9 @@ export default {
 .card{
   background-color: rgb(99, 99, 219);
   max-width: 480px;
+}
+div{
+  width: 25vh;
+  box-sizing: border-box;
 }
 </style>
