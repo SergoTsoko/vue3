@@ -1,115 +1,73 @@
-
-
 <template>
-  <!-- <div class="number">
-    <el-button type="primary" @click="addNumber">+</el-button>
-    <el-button type="primary" @click="removeNumber">-</el-button>
-  </div> -->
-  
-  <!-- <div class="cifra">
-    Ваша цифра: <em>{{ number }}</em> 
-  </div> -->
-
   <div>
-    <!-- <div class="text1">
-      <el-button type="primary" @click="toggleText">
-        {{ isTextVisible ? "Скрыть текст" : "Показать текст" }}
-      </el-button>
-    </div>
-
-    <div class="samtext" v-if="isTextVisible">
-      {{ text }}
-    </div> -->
-    
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
-    
+    <card v-for="card in cardArray" :key="card.id"
+          :title="card.title"
+          :text="card.text"
+          :id="card.id" />
   </div>
-
-
-
 </template>
 
 <script>
-import ElementPlus from 'element-plus';
-import form from './components/form.vue'
-import card from  './components/card.vue'
+import { ref } from "vue";
+import card from "./components/card.vue";
+
 export default {
   components: { card },
-  data() {
-    return {
-      number: 0,
-      text: "Тут написан очень важный текст",
-      isTextVisible: true, 
-      userName: "",
-      UserPassword:"",
-      users: [],
-     
-   };
-  },
-  methods: {
-    addNumber() {
-      this.number += 1;
-    },
-    removeNumber() {
-      this.number -= 1;
-    },
-    toggleText() {
-      this.isTextVisible = !this.isTextVisible; 
-},
-    sendData(){
-      this.users.push({
-        name: this.userName,
-        pass:this.UserPassword,
-      })
-    },
-    resetData(){
-      this.users.length = 0; 
+  setup() {
+    const number = ref(0);
+    const text = ref("Тут написан очень важный текст");
+    const isTextVisible = ref(true);
+    const userName = ref("");
+    const userPassword = ref("");
+    const users = ref([]);
+
+
+    const cardArray = ref([]);
+    for (let i = 1; i <= 10; i++) {
+      cardArray.value.push({
+        title: `Card ${i}`,
+        text: `Text ${i}`,  
+        id: `${i}`           
+      });
     }
-  },
+
+    const addNumber = () => {
+      number.value += 1;
+    };
+
+    const removeNumber = () => {
+      number.value -= 1;
+    };
+
+    const toggleText = () => {
+      isTextVisible.value = !isTextVisible.value;
+    };
+
+    const sendData = () => {
+      users.value.push({
+        name: userName.value,
+        pass: userPassword.value
+      });
+    };
+
+    const resetData = () => {
+      users.value = [];
+    };
+
+    return {
+      number,
+      text,
+      isTextVisible,
+      userName,
+      userPassword,
+      users,
+      addNumber,
+      removeNumber,
+      toggleText,
+      sendData,
+      resetData,
+      cardArray
+    };
+  }
 };
 </script>
-
-
-<style >
-.number {
-  margin-left: 40%;
-  padding-top: 50px;
-}
-.cifra {
-  margin-left: 40%;
-}
-.text1 {
-  margin-left: 40%;
-  display: flex;
-  flex-flow: column;
-  width: fit-content;
-}
-.samtext {
-  justify-content: center;
-  display: flex;
-}
-.el-button + .el-button {
-  margin: 5px;
-}
-.sender{
-  background-color:rgb(121, 35, 121);
-  color:black
-}
-.card{
-  background-color: rgb(99, 99, 219);
-  max-width: 480px;
-}
-div{
-  width: 25vh;
-  box-sizing: border-box;
-}
-</style>
